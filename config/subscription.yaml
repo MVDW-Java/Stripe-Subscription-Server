@@ -1,0 +1,13 @@
+# Define subscriptions
+# --------------------------------------
+subscriptions:
+  - id: 0001
+    name: Basic
+    price: 4.99
+    currency: USD
+    frequency: monthly
+  - id: 0002
+    name: Premium
+    price: 9.99
+    currency: USD
+    frequency: monthly

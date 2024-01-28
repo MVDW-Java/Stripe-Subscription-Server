@@ -1,0 +1,6 @@
+engine: mysql
+
+host: localhost
+username: production
+password: null
+database: StripeSubscription

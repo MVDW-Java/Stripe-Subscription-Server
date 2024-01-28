@@ -1,0 +1,5 @@
+# Enable or disable different currencies
+# --------------------------------------
+global: true
+
+RUB: false
