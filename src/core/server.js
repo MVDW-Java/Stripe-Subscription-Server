@@ -3,12 +3,14 @@ const http = require("http");
 
 const config = require("./config.js");
 
+const methods = require("./endpoints/methods.js");
+
+
 async function requestListener(req, res) {
 
     // json object
     var obj = {};
-    obj["success"] = true;
-    obj["message"] = "";
+    obj["code"] = "OK";
 
     // set headers
     res.setHeader("Content-Type", "application/json");
@@ -24,16 +26,14 @@ async function requestListener(req, res) {
 
     switch (api_request[0]) {
         case "customer":
-            obj = await apiUser(api_request, obj);
+            obj = await endpointCustomer(api_request, obj);
             break;
-        case "userall":
-            obj["success"] = false;
-            obj["message"] = "function not implemented";
+        case "methods":
+            obj = await methods.endpoint(api_request, obj);
 
             break;
         default:
-            obj["success"] = false;
-            obj["message"] = "endpoint is not valid";
+            obj["code"] = "NO_ENDPOINT";
             break;
 
     }

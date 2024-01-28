@@ -6,7 +6,6 @@ var files = ["subscription", "database", "currency", "rest"];
 
 async function loadConfig() {
     var success = true;
-    console.log(files.length);
 
     for(i=0; i<files.length; i++){
         var file = files[i];

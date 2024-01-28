@@ -1,0 +1,33 @@
+{
+    "type": ["bank_debits", "bank_redirects", "buy_now_pay_later", "cards", "link", "real-time_payments", "vouchers", "wallets"],
+    "all": {
+        "bank_debits": ["ach_direct_debit", "bacs_direct_debit", "becs_direct_debit", "pre-authorized_debit_in_canada", "sepa_debit"],
+        "bank_redirects": ["bancontact", "bank_transfers", "blik", "eps", "fpx", "gireopay", "ideal", "p24"],
+        "buy_now_pay_later": ["affirm", "afterpay", "klarna", "zip"],
+        "cards": ["cards"],
+        "link": ["link"],
+        "real-time_payments": ["swish", "paynow", "promptpay"],
+        "vouchers": ["boleto", "konbini", "oxxo"],
+        "wallets": ["apple_pay", "alipay", "cash_app_pay", "grabpay", "google_pay", "mobilepay", "paypal", "wechat_pay"]
+    },
+    "subscription": {
+        "bank_debits": ["ach_direct_debit", "bacs_direct_debit", "becs_direct_debit", "pre-authorized_debit_in_canada", "sepa_debit"],
+        "bank_redirects": ["bancontact", "bank_transfers", "eps", "fpx", "ideal"],
+        "buy_now_pay_later": [],
+        "cards": ["cards"],
+        "link": ["link"],
+        "real-time_payments": [],
+        "vouchers": ["boleto"],
+        "wallets": ["apple_pay", "cash_app_pay", "google_pay", "paypal"]
+    }, 
+    "mobile": {
+        "bank_debits": ["ach_direct_debit", "bacs_direct_debit", "becs_direct_debit", "sepa_debit"],
+        "bank_redirects": ["bancontact", "blik", "eps", "fpx", "gireopay", "ideal", "p24"],
+        "buy_now_pay_later": ["affirm", "afterpay", "klarna", "zip"],
+        "cards": ["cards"],
+        "link": [],
+        "real-time_payments": ["swish"],
+        "vouchers": ["boleto", "konbini", "oxxo"],
+        "wallets": ["apple_pay", "alipay", "cash_app_pay", "grabpay", "google_pay", "mobilepay", "paypal"]
+    }
+}
