@@ -2,8 +2,8 @@ const clc = require("cli-color");
 
 
 
-const config = require('./core/config.js');
-const server = require('./core/server.js');
+const config = require('./config.js');
+const server = require('./server/server.js');
 
 const pjson = require('./package.json');
 

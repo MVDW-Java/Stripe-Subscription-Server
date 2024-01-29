@@ -1,7 +1,7 @@
 // packages
 const http = require("http");
 
-const config = require("./config.js");
+const config = require("../config.js");
 
 const methods = require("./endpoints/methods.js");
 
