@@ -4,7 +4,7 @@ const json_country_list = require("../../data/country_list.json");
 
 // /method/{country}
 async function endpoint(api_request, obj){
-    var county = api_request[1];
+    var county = api_request[1].toUpperCase();
     var suggestion = json_country_suggestions[county];
 
     if(!json_country_list.includes(county)){

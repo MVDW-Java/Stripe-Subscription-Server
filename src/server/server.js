@@ -3,7 +3,7 @@ const http = require("http");
 
 const config = require("../config.js");
 
-const methods = require("./endpoints/methods.js");
+const payment_suggestion = require("./endpoints/payment_suggestion.js");
 
 
 async function requestListener(req, res) {
@@ -28,8 +28,8 @@ async function requestListener(req, res) {
         case "customer":
             obj = await endpointCustomer(api_request, obj);
             break;
-        case "methods":
-            obj = await methods.endpoint(api_request, obj);
+        case "payment_suggestion":
+            obj = await payment_suggestion.endpoint(api_request, obj);
 
             break;
         default:
