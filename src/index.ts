@@ -20,13 +20,12 @@ console.log(" ");
 async function init() {
     console.log("Loading configuration")
     var success = await config.loadConfig()
-    if (success) console.log("[ OK ]");
+    if (success) console.log("[ OK ]")
 
 
     await server.initServer();
 
 
 }
-
 
 init();
