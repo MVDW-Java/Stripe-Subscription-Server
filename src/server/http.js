@@ -1,11 +1,8 @@
 // packages
 const http = require("http");
-const mysql = require('promise-mysql');
+
 
 const config = require("../config.js");
-
-const endpoint_payment_suggestion = require("./endpoints/payment_suggestion.js");
-const endpoint_customer = require("./endpoints/customer.js");
 
 var con;
 
@@ -29,10 +26,10 @@ async function requestListener(req, res) {
 
     switch (api_request[0]) {
         case "customer":
-            obj = await endpoint_customer.endpoint(api_request, obj, con);
+            obj = await require("./endpoints/customer.js").endpoint(api_request, obj);
             break;
         case "payment_suggestion":
-            obj = await endpoint_payment_suggestion.endpoint(api_request, obj);
+            obj = await require("./endpoints/payment_suggestion.js").endpoint(api_request, obj);
 
             break;
         default:
@@ -48,28 +45,20 @@ async function requestListener(req, res) {
 
 
 
-async function initServer(){
+async function initHttp(){
     const server = http.createServer(requestListener);
 
     const config_rest = await config.getConfig("rest");
-    const config_db = await config.getConfig("database");
+    
 
     const rest_host = config_rest.host;
     const rest_port = config_rest.port;
-    
-    con = await mysql.createConnection({
-        host: config_db.host,
-        user: config_db.username,
-        password: config_db.password,
-        database: config_db.database
-    });
-    
 
     server.listen(rest_port, rest_host, () => {
         console.log("=========");
         console.log("Server running on '" + rest_host + ":" + rest_port + "'");
     });
-        
+    return true;
 }
 
 
@@ -78,4 +67,4 @@ async function initServer(){
 
 
 
-module.exports = { requestListener, initServer };
+module.exports = { requestListener, initHttp };
