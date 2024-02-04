@@ -4,8 +4,6 @@ const http = require("http");
 
 const config = require("../config.js");
 
-var con;
-
 async function requestListener(req, res) {
 
     // json object
