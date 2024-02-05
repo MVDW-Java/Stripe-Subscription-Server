@@ -2,7 +2,7 @@ const yaml = require('js-yaml');
 const fs = require('fs');
 
 var configs = {};
-var files = ["subscription", "database", "currency", "rest"];
+var files = ["subscription", "database", "currency", "rest", "service"];
 
 async function loadConfig() {
     var success = true;
