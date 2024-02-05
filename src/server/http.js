@@ -24,10 +24,10 @@ async function requestListener(req, res) {
 
     switch (api_request[0]) {
         case "customer":
-            obj = await require("./endpoints/customer.js").endpoint(api_request, obj);
+            obj = await require("./endpoints/customer/customer.js").endpoint(api_request, obj);
             break;
-        case "payment_suggestion":
-            obj = await require("./endpoints/payment_suggestion.js").endpoint(api_request, obj);
+        case "payment":
+            obj = await require("./endpoints/payment/payment.js").endpoint(api_request, obj);
 
             break;
         default:

@@ -1,4 +1,4 @@
-var sql = require("../sql.js").sql;
+var sql = require("../../sql.js").sql;
 
 
 // customer/{identification}/{task}
@@ -15,7 +15,7 @@ async function endpoint(api_request, obj, post = null) {
 
     switch (api_request[2]) {
         case "methods":
-            obj = await getCustomerMethods(api_request, obj, post);
+            obj = await require("./methods.js").getCustomerMethods(api_request, obj, post);
             break;
 
         case null || undefined:
@@ -32,35 +32,12 @@ async function endpoint(api_request, obj, post = null) {
 
 }
 
-async function getCustomerMethods(api_request, obj, post) {
-
-    var query = await sql.query("select * from methods where customer=?", api_request[1]);
-
-    obj["data"] = {};
-    obj["data"]["methods"] = [];
-
-    query.forEach(method => {
-        var method_obj = {}
-
-        method_obj["type"] = method["method"];
-        method_obj["account"] = "";
-
-
-
-        obj["data"]["methods"].push(method_obj);
-    });
-
-
-    return obj;
-
-
-}
 
 
 
 
 
-
+/*
 async function createCustomer(api_request, obj, post = null) {
     console.log(sql);
 
@@ -75,7 +52,7 @@ async function createCustomer(api_request, obj, post = null) {
     console.log(customer.length);
 
 }
-
+*/
 
 
 
