@@ -19,8 +19,8 @@ async function initSQL() {
         return true;
 
 
-    } catch {
-        return false;
+    } catch(e) {
+        return e;
     }
 }
 

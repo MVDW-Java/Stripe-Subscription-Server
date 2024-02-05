@@ -36,10 +36,16 @@ async function init() {
         // TODO: Add colors with clc 
         process.stdout.write("Loading " + list_load[i]["NAME"] + "...      ");
 
-        if (await list_load[i]["LOAD"]()) {
+        var load_state = await list_load[i]["LOAD"]();
+        if (typeof load_state == "boolean" && load_state) {
             process.stdout.write("[ OK ]\n");
         } else {
             process.stdout.write("[FAIL]\n");
+            if(typeof load_state !== "boolean"){
+                process.stdout.write("\nAn fatal error occured while initializing the stripe server: \n" + load_state + "\n");
+            }
+
+
             process.exit(1);
         }
 
