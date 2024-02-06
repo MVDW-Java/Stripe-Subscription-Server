@@ -11,8 +11,8 @@ async function getPaymentSuggestion(api_request, obj){
         return obj;
     }
 
-    var county = api_request[2].toUpperCase();
-    var suggestion = json_country_suggestions[county];
+    const county = api_request[2].toUpperCase();
+    const suggestion = json_country_suggestions[county];
 
     if(!json_country_list.includes(county)){
         obj["code"] = "COUNTRY_INVALID";

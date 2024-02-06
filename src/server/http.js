@@ -7,7 +7,7 @@ const config = require("../config.js");
 async function requestListener(req, res) {
 
     // json object
-    var obj = {};
+    let obj = {};
     obj["code"] = "OK";
 
     // set headers
@@ -16,7 +16,7 @@ async function requestListener(req, res) {
 
 
     // filter api
-    var api_request = req.url.split('/').filter(function (el) {
+    const api_request = req.url.split('/').filter(function (el) {
         return el !== "";
     });
 

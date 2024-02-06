@@ -1,15 +1,15 @@
-var sql = require("../../sql.js").sql;
+const sql = require("../../sql.js").sql;
 
 
 async function getCustomerMethods(api_request, obj, post) {
 
-    var query = await sql.query("select * from methods where customer=?", api_request[1]);
+    const query = await sql.query("select * from methods where customer=?", api_request[1]);
 
     obj["data"] = {};
     obj["data"]["methods"] = [];
 
     query.forEach(method => {
-        var method_obj = {}
+        let method_obj = {}
 
         method_obj["type"] = method["method"];
         method_obj["account"] = "";

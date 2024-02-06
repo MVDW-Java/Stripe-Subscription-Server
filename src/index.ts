@@ -2,7 +2,7 @@ const clc = require("cli-color");
 
 const pjson = require('./package.json');
 
-var list_load = [
+const list_load = [
     {
         "NAME": "configuration",
         "LOAD": require('./config.js').loadConfig
@@ -30,13 +30,13 @@ async function init() {
     console.log(clc.blackBright("License: ") + clc.blackBright.italic(pjson.license));
     console.log(" ");
 
-    for (let i = 0; i < list_load.length; i++) {
+    for (let modlue of list_load) {
 
 
         // TODO: Add colors with clc 
-        process.stdout.write("Loading " + list_load[i]["NAME"] + "...      ");
+        process.stdout.write("Loading " + modlue["NAME"] + "...      ");
 
-        var load_state = await list_load[i]["LOAD"]();
+        const load_state = await modlue["LOAD"]();
         if (typeof load_state == "boolean" && load_state) {
             process.stdout.write("[ OK ]\n");
         } else {
