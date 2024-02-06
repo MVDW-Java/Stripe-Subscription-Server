@@ -5,20 +5,15 @@ let configs = {};
 const files = ["subscription", "database", "currency", "rest", "service"];
 
 async function loadConfig() {
-    let success = true;
 
-    for(let i=0; i<files.length; i++){
-        let file = files[i];
-
+    for(let file of files){
         try {
             configs[file] =  yaml.load(fs.readFileSync("./config/" + file + ".yaml", 'utf8'));
         } catch (e) {
-            console.log(e);
-            success = false;
+            return e;
         }
-
     }
-    return success;
+    return true;
 }
 
 async function getConfig(name) {

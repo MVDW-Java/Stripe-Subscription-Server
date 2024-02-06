@@ -21,10 +21,6 @@ async function endpoint(api_request, obj, post = null) {
         case "suggest":
             obj = await require("./suggest.js").getPaymentSuggestion(api_request, obj, post);
             break;
-
-        case null || undefined:
-            console.log("show user");
-            break;
         default:
             obj["code"] = "ENDPOINT_PAYMENT_INVALID";
             obj["data"] = {};
