@@ -4,7 +4,8 @@ const http = require("http");
 
 const config = require("../config.js");
 
-async function requestListener(req, res) {
+
+async function requestHandler(req, res) {
 
     // json object
     let obj = {};
@@ -14,20 +15,47 @@ async function requestListener(req, res) {
     res.setHeader("Content-Type", "application/json");
     res.writeHead(200);
 
+    // appending post chunks into array
+    const chunks = [];
+    let post = null;
+    req.on('data', chunk => {
+        chunks.push(chunk)
+        if (chunks.length > 1e6) req.connection.destroy();
+    });
+
+    // after processing post chunks, parse the post is json and handle the request 
+    req.on('end', async () => {
+        try {
+            if (chunks.length > 0) post = JSON.parse(Buffer.concat(chunks));
+        } catch {
+            obj["code"] = "INVALID_POST";
+            res.end(JSON.stringify(obj));
+            return;
+        }
+
+        // Handle request
+        obj = await handle(req, obj, post);
+
+        res.end(JSON.stringify(obj));
+    });
+
+}
+
+
+async function handle(req, obj, post) {
 
     // filter api
     const api_request = req.url.split('/').filter(function (el) {
         return el !== "";
     });
 
-
-
+    // endpoint type
     switch (api_request[0]) {
         case "customer":
-            obj = await require("./endpoints/customer/customer.js").endpoint(api_request, obj);
+            obj = await require("./endpoints/customer/customer.js").endpoint(api_request, obj, post);
             break;
         case "payment":
-            obj = await require("./endpoints/payment/payment.js").endpoint(api_request, obj);
+            obj = await require("./endpoints/payment/payment.js").endpoint(api_request, obj, post);
 
             break;
         default:
@@ -36,18 +64,17 @@ async function requestListener(req, res) {
 
     }
 
-    res.end(JSON.stringify(obj));
+    return obj;
+
 
 }
 
 
-
-
-async function initHttp(){
-    const server = http.createServer(requestListener);
+async function initHttp() {
+    const server = http.createServer(requestHandler);
 
     const config_rest = await config.getConfig("rest");
-    
+
 
     const rest_host = config_rest.host;
     const rest_port = config_rest.port;
@@ -65,4 +92,4 @@ async function initHttp(){
 
 
 
-module.exports = { requestListener, initHttp };
+module.exports = { initHttp };
