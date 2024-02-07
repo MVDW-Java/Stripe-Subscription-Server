@@ -32,7 +32,10 @@ async function init() {
 
     for (let modlue of list_load) {
 
-        process.stdout.write("Loading " + modlue["NAME"] + "...      ");
+        let lenght = modlue["NAME"].length
+        let space = ' '.repeat((32 - lenght));
+     
+        process.stdout.write("Loading " + modlue["NAME"] + "..." + space);
 
         const load_state = await modlue["LOAD"]();
         if (typeof load_state == "boolean" && load_state) {
