@@ -32,17 +32,27 @@ async function init() {
 
     for (let modlue of list_load) {
 
-
-        // TODO: Add colors with clc 
         process.stdout.write("Loading " + modlue["NAME"] + "...      ");
 
         const load_state = await modlue["LOAD"]();
         if (typeof load_state == "boolean" && load_state) {
-            process.stdout.write("[ OK ]\n");
+            process.stdout.write(clc.white("[ "));
+            process.stdout.write(clc.greenBright("OK"));
+            process.stdout.write(clc.white(" ]\n"));
+                
         } else {
-            process.stdout.write("[FAIL]\n");
+            process.stdout.write(clc.white("["));
+            process.stdout.write(clc.redBright("FAIL"));
+            process.stdout.write(clc.white("]\n"));
+
             if(typeof load_state !== "boolean"){
-                process.stdout.write("\nAn fatal error occured while initializing the stripe server: \n" + load_state + "\n");
+                process.stdout.write(clc.red("\nAn fatal error occured while initializing the stripe server: \n"));
+                if(load_state.errors) {
+                    console.log(load_state.errors);
+                } else {
+                    console.log(load_state);
+                }
+
             }
 
 
