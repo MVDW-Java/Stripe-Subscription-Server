@@ -32,8 +32,8 @@ async function init() {
 
     for (let modlue of list_load) {
 
-        let lenght = modlue["NAME"].length
-        let space = ' '.repeat((32 - lenght));
+        let length = modlue["NAME"].length
+        let space = ' '.repeat((32 - length));
      
         process.stdout.write("Loading " + modlue["NAME"] + "..." + space);
 
