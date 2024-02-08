@@ -3,15 +3,15 @@ const json_country_suggestions = require("../../../data/country_suggestions.json
 const json_country_list = require("../../../data/country_list.json"); 
 
 // /method/{country}
-async function getPaymentSuggestion(api_request, obj){
+async function endpoint(api_request, obj){
 
-    if (api_request[2] == undefined) {
+    if (api_request[1] == undefined) {
         obj["code"] = "ENDPOINT_PAYMENT_SUGGEST_NULL";
         obj["data"] = {};
         return obj;
     }
 
-    const county = api_request[2].toUpperCase();
+    const county = api_request[1].toUpperCase();
     const suggestion = json_country_suggestions[county];
 
     if(!json_country_list.includes(county)){
@@ -31,4 +31,4 @@ async function getPaymentSuggestion(api_request, obj){
     return obj;
 
 }
-module.exports = { getPaymentSuggestion };
+module.exports = { endpoint };

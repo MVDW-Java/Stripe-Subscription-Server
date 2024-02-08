@@ -51,11 +51,17 @@ async function handle(req, obj, post) {
 
     // endpoint type
     switch (api_request[0]) {
-        case "customer":
-            obj = await require("./endpoints/customer/customer.js").endpoint(api_request, obj, post);
+        case "methods_get":
+            obj = await require("./endpoints/methods_get/endpoint.js").endpoint(api_request, obj, post);
             break;
-        case "payment":
-            obj = await require("./endpoints/payment/payment.js").endpoint(api_request, obj, post);
+        case "methods_add":
+            obj = await require("./endpoints/methods_add/endpoint.js").endpoint(api_request, obj, post);
+            break;
+        case "methods_ask_add":
+            obj = await require("./endpoints/methods_ask_add/endpoint.js").endpoint(api_request, obj, post);
+            break;
+        case "methods_suggest":
+            obj = await require("./endpoints/methods_suggest/endpoint.js").endpoint(api_request, obj, post);
 
             break;
         default:

@@ -4,7 +4,13 @@ const sql = require("../../sql.js").sql;
 const stripe = require('stripe')(config.getConfig("service")["stripe_secret"]);
 
 
-async function addCustomerMethods(api_request, obj, post){
+async function endpoint(api_request, obj, post){
+
+    if (api_request[1] == undefined) {
+        obj["code"] = "ENDPOINT_METHODS_ADD_NULL";
+        obj["data"] = {};
+        return obj;
+    }
 
     const query = await sql.query("SELECT * FROM customers WHERE id=?", api_request[1]);
 
@@ -21,4 +27,4 @@ async function addCustomerMethods(api_request, obj, post){
     return obj;
 
 }
-module.exports = { addCustomerMethods };
+module.exports = { endpoint };
