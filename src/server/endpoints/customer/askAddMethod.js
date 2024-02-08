@@ -9,7 +9,7 @@ async function askAddCustomerMethods(api_request, obj, post) {
     const query = await sql.query("SELECT * FROM customers WHERE id=?", api_request[1]);
 
 
-    billing_details = {
+    const billing_details = {
         "address": {
             "city": {
                 "required": true, "value": query[0]?.city ?? null,
