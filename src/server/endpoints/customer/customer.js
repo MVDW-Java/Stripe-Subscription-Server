@@ -15,6 +15,12 @@ async function endpoint(api_request, obj, post = null) {
         case "methods":
             obj = await require("./methods.js").getCustomerMethods(api_request, obj, post);
             break;
+        case "add_method":
+            obj = await require("./addMethod.js").addCustomerMethods(api_request, obj, post);
+            break;
+        case "ask_add_method":
+            obj = await require("./askAddMethod.js").askAddCustomerMethods(api_request, obj, post);
+            break;
         default:
             obj["code"] = "ENDPOINT_CUSTOMER_INVALID_TASK";
             obj["data"] = {};
