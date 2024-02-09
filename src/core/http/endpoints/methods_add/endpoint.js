@@ -1,5 +1,5 @@
-const config = require("../../../config.js");
-const sql = require("../../sql.js").sql;
+const config = require("../../../../config.js");
+const sql = require("../../../sql/sql.js").sql;
 
 const stripe = require('stripe')(config.getConfig("service")["stripe_secret"]);
 

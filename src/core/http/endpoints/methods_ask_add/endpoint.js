@@ -1,12 +1,12 @@
-const config = require("../../../config.js");
-const sql = require("../../sql.js").sql;
+const config = require("../../../../config.js");
+const sql = require("../../../sql/sql.js").sql;
 
 const stripe = require('stripe')(config.getConfig("service")["stripe_secret"]);
 
 
 async function endpoint(api_request, obj, post) {
 
-    if (api_request[1] == undefined) {
+    if (api_request[1] == undefined || api_request[2] == undefined) {
         obj["code"] = "ENDPOINT_METHODS_ASK_ADD_NULL";
         obj["data"] = {};
         return obj;

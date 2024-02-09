@@ -1,6 +1,6 @@
 
-const json_country_suggestions = require("../../../data/country_suggestions.json"); 
-const json_country_list = require("../../../data/country_list.json"); 
+const json_country_suggestions = require("../../../../data/country_suggestions.json"); 
+const json_country_list = require("../../../../data/country_list.json"); 
 
 // /method/{country}
 async function endpoint(api_request, obj){

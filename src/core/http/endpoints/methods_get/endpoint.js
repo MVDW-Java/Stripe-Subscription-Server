@@ -1,4 +1,4 @@
-const sql = require("../../sql.js").sql;
+const sql = require("../../../sql/sql.js").sql;
 
 
 async function endpoint(api_request, obj, post) {

@@ -2,7 +2,7 @@
 const http = require("http");
 
 
-const config = require("../config.js");
+const config = require("../../config.js");
 
 
 async function requestHandler(req, res) {

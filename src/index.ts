@@ -8,12 +8,12 @@ const list_load = [
         "LOAD": require('./config.js').loadConfig
     },
     {
-        "NAME": "sql server",
-        "LOAD": require('./server/sql.js').initSQL
+        "NAME": "SQL module",
+        "LOAD": require('./core/sql/sql.js').initSQL
     },
     {
-        "NAME": "http server",
-        "LOAD": require('./server/http.js').initHttp
+        "NAME": "HTTP server",
+        "LOAD": require('./core/http/server.js').initHttp
     },
 
 
