@@ -27,47 +27,38 @@ async function endpoint(api_request, obj, post) {
 
     obj["data"]["billing_details"] = require("../../../../data/methods/types/" + api_request[2] + ".json")
 
-    // inject value into customer_details
-    function inside(data, path = undefined) {
 
+
+    // inject value from customer data into customer_details
+    function injectCustomerData(data, path = undefined) {
 
         for (const [key, value] of Object.entries(data)) {
 
-            // copy to local value
-            let local_path = [];
-            if (path) {
-                i = -1;
 
-                while (++i < path.length) {
-                    local_path[i] = path[i];
-                }
-            }
-
+            let local_path = path;
 
             if (typeof value === 'object') {
                 if (path) {
-                    local_path.push(key)
-                    inside(value, local_path)
+                    local_path += "." + key;
+                    injectCustomerData(value, local_path)
 
                 } else {
-                    inside(value, [key])
+                    injectCustomerData(value, key)
                 }
 
             } else {
+                type = path.split(".");
 
-
-
-                console.log(customer_details[path]);
-
-
-
-                console.log(path, key, value);
+                eval("customer_details." + path + ".value = query[0]?." + type[type.length - 1] + " ?? null");
             }
-
-
         }
     }
-    inside(customer_details)
+
+    injectCustomerData(customer_details)
+
+
+
+
 
     /*
     const customer_details = {
