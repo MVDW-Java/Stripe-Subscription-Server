@@ -1,0 +1,31 @@
+{
+    "address": {
+        "city": {
+            "required": true
+        },
+        "country": {
+            "required": true
+        },
+        "line1": {
+            "required": true
+        },
+        "line2": {
+            "required": false
+        },
+        "postal_code": {
+            "required": true
+        },
+        "state": {
+            "required": true
+        }
+    },
+    "email": {
+        "required": true
+    },
+    "name": {
+        "required": true
+    },
+    "phone": {
+        "required": true
+    }
+}
