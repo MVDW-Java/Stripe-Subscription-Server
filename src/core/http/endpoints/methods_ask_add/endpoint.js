@@ -11,8 +11,8 @@ async function endpoint(api_request, obj, post) {
         obj["code"] = "ENDPOINT_METHODS_ASK_ADD_NULL";
         return obj;
     }
-    const customer_details = require("../../../../data/methods/customer_details.json");
-    const methods = require("../../../../data/methods/types.json");
+    const customer_details = JSON.parse(JSON.stringify(require("../../../../data/methods/customer_details.json")));
+    const methods = JSON.parse(JSON.stringify(require("../../../../data/methods/types.json")));
 
     if (!methods.includes(api_request[2])) {
         obj["code"] = "ENDPOINT_METHODS_ASK_ADD_INVALID";
@@ -31,69 +31,16 @@ async function endpoint(api_request, obj, post) {
 
     // inject value from customer data into customer_details
     function injectCustomerData(data, path = undefined) {
-
         for (const [key, value] of Object.entries(data)) {
+            let local_path = path ? `${path}.${key}` : key;
 
-
-            let local_path = path;
-
-            if (typeof value === 'object') {
-                if (path) {
-                    local_path += "." + key;
-                    injectCustomerData(value, local_path)
-
-                } else {
-                    injectCustomerData(value, key)
-                }
-
-            } else {
-                type = path.split(".");
-
-                eval("customer_details." + path + ".value = query[0]?." + type[type.length - 1] + " ?? null");
-            }
+            if (typeof value === 'object') injectCustomerData(value, local_path)
+            else eval("customer_details." + path + ".value = query[0]?." + path.split('.').pop() + " ?? null");
+            
         }
     }
 
     injectCustomerData(customer_details)
-
-
-
-
-
-    /*
-    const customer_details = {
-        "address": {
-            "city": {
-                "required": true, "value": query[0]?.city ?? null,
-            },
-            "country": {
-                "required": true, "value": query[0]?.country ?? null,
-            },
-            "line1": {
-                "required": true, "value": query[0]?.line1 ?? null,
-            },
-            "line2": {
-                "required": false, "value": query[0]?.line2 ?? null,
-            },
-            "postal_code": {
-                "required": true, "value": query[0]?.postal_code ?? null,
-            },
-            "state": {
-                "required": true, "value": query[0]?.state ?? null,
-            },
-        },
-        "email": {
-            "required": true, "value": query[0]?.email ?? null,
-        },
-        "name": {
-            "required": true, "value": query[0]?.name ?? null,
-        },
-        "phone": {
-            "required": true, "value": query[0]?.phone ?? null,
-        }
-    };*/
-
-
 
 
     obj["data"]["customer_details"] = customer_details;
