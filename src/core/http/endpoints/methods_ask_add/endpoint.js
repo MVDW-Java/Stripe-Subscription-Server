@@ -28,6 +28,12 @@ async function endpoint(api_request, obj, post) {
     obj["data"]["billing_details"] = require("../../../../data/methods/types/" + api_request[2] + ".json")
 
 
+    function deepValue(obj, path) {
+        for (var i = 0; i < path.length; i++) {
+            obj = obj[path[i]];
+        };
+        return obj;
+    };
 
     // inject value from customer data into customer_details
     function injectCustomerData(data, path = undefined) {
@@ -35,8 +41,7 @@ async function endpoint(api_request, obj, post) {
             let local_path = path ? `${path}.${key}` : key;
 
             if (typeof value === 'object') injectCustomerData(value, local_path)
-            else eval("customer_details." + path + ".value = query[0]?." + path.split('.').pop() + " ?? null");
-            
+            else deepValue(customer_details, path.split('.')).value = query[0]?.[path.split('.').pop()] ?? null;
         }
     }
 
