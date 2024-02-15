@@ -13,9 +13,6 @@ async function endpoint(api_request, obj, post){
     }
 
     const query = await sql.query("SELECT * FROM customers WHERE id=?", api_request[1]);
-    if(query.length == 0) {
-        
-    }
 
 
     console.log(query.length);

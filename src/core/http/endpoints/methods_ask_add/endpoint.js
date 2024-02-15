@@ -29,8 +29,8 @@ async function endpoint(api_request, obj, post) {
 
 
     function deepValue(obj, path) {
-        for (var i = 0; i < path.length; i++) {
-            obj = obj[path[i]];
+        for (let value of path) {
+            obj = obj[value];
         };
         return obj;
     };
