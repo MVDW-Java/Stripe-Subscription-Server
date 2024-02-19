@@ -1,6 +1,4 @@
 const config = require("../../../../config.js");
-const conf_service = config.getConfig("service");
-
 const sql = require("../../../sql/sql.js").sql;
 
 
