@@ -1,10 +1,15 @@
 const config = require("../../../../config.js");
+const conf_service = config.getConfig("service");
+
 const sql = require("../../../sql/sql.js").sql;
 
-const stripe = require('stripe')(config.getConfig("service")["stripe_secret"]);
+
+const stripe = require('../../../stripe.js').stripeAPI();
 
 
 async function endpoint(api_request, obj, post) {
+    var stripeAPI = await stripe;
+
     obj["data"] = {};
 
     if (api_request[1] == undefined || api_request[2] == undefined) {
@@ -19,10 +24,14 @@ async function endpoint(api_request, obj, post) {
         return obj;
     }
 
-
-
-
-    const query = await sql.query("SELECT * FROM customers WHERE id=?", api_request[1]);
+    const query = await sql.query("SELECT * FROM customers WHERE local_id=?", api_request[1]);
+    let customer = {};
+    if(query.length > 0){
+        try {
+            customer = await stripeAPI.customers.retrieve(query[0]["stripe_id"]);
+        } catch(e) {}
+    }
+    
 
 
     obj["data"]["billing_details"] = require("../../../../data/methods/types/" + api_request[2] + ".json")
@@ -41,7 +50,7 @@ async function endpoint(api_request, obj, post) {
             let local_path = path ? `${path}.${key}` : key;
 
             if (typeof value === 'object') injectCustomerData(value, local_path)
-            else deepValue(customer_details, path.split('.')).value = query[0]?.[path.split('.').pop()] ?? null;
+            else deepValue(customer_details, path.split('.')).value = deepValue(customer, path.split('.')) ?? "";
         }
     }
 

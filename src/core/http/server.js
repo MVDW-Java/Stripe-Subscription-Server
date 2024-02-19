@@ -58,7 +58,7 @@ async function handle(req, obj, post) {
             obj = await require("./endpoints/methods_add/endpoint.js").endpoint(api_request, obj, post);
             break;
         case "methods_ask_add":
-            obj = await require("./endpoints/methods_ask_add/endpoint.ts").endpoint(api_request, obj, post);
+            obj = await require("./endpoints/methods_ask_add/endpoint.js").endpoint(api_request, obj, post);
             break;
         case "methods_suggest":
             obj = await require("./endpoints/methods_suggest/endpoint.js").endpoint(api_request, obj, post);
