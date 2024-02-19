@@ -8,7 +8,7 @@ const stripe = require('../../../stripe.js').stripeAPI();
 
 
 async function endpoint(api_request, obj, post) {
-    var stripeAPI = await stripe;
+    const stripeAPI = await stripe;
 
     obj["data"] = {};
 
