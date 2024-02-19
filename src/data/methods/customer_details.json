@@ -1,31 +1,89 @@
 {
-    "address": {
-        "city": {
+    "ui": [
+        {
+            "type": "text",
+            "required": true,
+            "name": "city",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": true,
+            "name": "country",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": true,
+            "name": "line1",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": false,
+            "name": "line2",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": true,
+            "name": "postal_code",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": true,
+            "name": "state",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": true,
+            "name": "email",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": true,
+            "name": "name",
+            "value": ""
+        },
+        {
+            "type": "text",
+            "required": true,
+            "name": "phone",
+            "value": ""
+        }
+    ],
+    "stripe_data": {
+        "address": {
+            "city": {
+                "required": true
+            },
+            "country": {
+                "required": true
+            },
+            "line1": {
+                "required": true
+            },
+            "line2": {
+                "required": false
+            },
+            "postal_code": {
+                "required": true
+            },
+            "state": {
+                "required": true
+            }
+        },
+        "email": {
             "required": true
         },
-        "country": {
+        "name": {
             "required": true
         },
-        "line1": {
-            "required": true
-        },
-        "line2": {
-            "required": false
-        },
-        "postal_code": {
-            "required": true
-        },
-        "state": {
+        "phone": {
             "required": true
         }
-    },
-    "email": {
-        "required": true
-    },
-    "name": {
-        "required": true
-    },
-    "phone": {
-        "required": true
     }
 }
