@@ -22,7 +22,7 @@ async function initSQL() {
         })
 
 
-        for (table of tables) {
+        for (let table of tables) {
             const data = await fs.readFile(__dirname + "/tables/" + table + ".sql");
             module.exports.sql.query(data.toString());
         }
